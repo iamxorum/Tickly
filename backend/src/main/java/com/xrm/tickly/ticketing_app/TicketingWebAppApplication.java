@@ -12,6 +12,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class TicketingWebAppApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TicketingWebAppApplication.class, args);
+        SpringApplication.run(com.xrm.tickly.ticketing_app.TicketingWebAppApplication.class, args);
     }
 }

@@ -1,6 +1,7 @@
-package com.xrm.tickly.ticketing_app.controller;
+package com.xrm.tickly.ticketing_app_test.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xrm.tickly.ticketing_app.controller.ProjectController;
 import com.xrm.tickly.ticketing_app.dto.ProjectDTO;
 import com.xrm.tickly.ticketing_app.service.ProjectService;
 import org.junit.jupiter.api.Test;

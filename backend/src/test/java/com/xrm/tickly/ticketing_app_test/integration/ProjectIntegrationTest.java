@@ -1,4 +1,4 @@
-package com.xrm.tickly.ticketing_app.integration;
+package com.xrm.tickly.ticketing_app_test.integration;
 
 import com.xrm.tickly.ticketing_app.dto.ProjectDTO;
 import com.xrm.tickly.ticketing_app.enums.ProjectStatus;

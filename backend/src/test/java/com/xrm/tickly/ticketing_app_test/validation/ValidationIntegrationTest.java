@@ -1,4 +1,4 @@
-package com.xrm.tickly.ticketing_app.validation;
+package com.xrm.tickly.ticketing_app_test.validation;
 
 import com.xrm.tickly.ticketing_app.dto.RegisterRequestDTO;
 import jakarta.validation.Validator;

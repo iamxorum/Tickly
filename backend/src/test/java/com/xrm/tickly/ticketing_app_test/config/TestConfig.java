@@ -1,4 +1,4 @@
-package com.xrm.tickly.ticketing_app.config;
+package com.xrm.tickly.ticketing_app_test.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.MessageSource;

@@ -1,5 +1,6 @@
-package com.xrm.tickly.ticketing_app.validation;
+package com.xrm.tickly.ticketing_app_test.validation;
 
+import com.xrm.tickly.ticketing_app.validation.StrongPasswordValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

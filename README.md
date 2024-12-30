@@ -3,8 +3,14 @@
 ## Overview
 TickLy is a sleek and efficient support ticket management system designed to streamline issue tracking and resolution processes. Built with React for an intuitive front-end experience and Spring Boot for a robust back-end, TickLy empowers users to create, assign, and monitor tickets effortlessly.
 
-## Version 0.2.0-beta
+# Version History
 
+## 0.2.1-beta (Current)
+### Project Structure & Build Optimization
+- 🏗️ Reorganized backend folder structure
+- 🛠️ Fixed build configuration
+
+## Version 0.2.0-beta
 ### 🚀 Key Features
 - User-friendly ticket management interface
 - Project-based organization

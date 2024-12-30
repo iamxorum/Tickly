@@ -1,4 +1,4 @@
-package com.xrm.tickly.ticketing_app.service;
+package com.xrm.tickly.ticketing_app_test.service;
 
 import com.xrm.tickly.ticketing_app.dto.ProjectDTO;
 import com.xrm.tickly.ticketing_app.model.Project;
@@ -6,6 +6,7 @@ import com.xrm.tickly.ticketing_app.model.User;
 import com.xrm.tickly.ticketing_app.enums.ProjectStatus;
 import com.xrm.tickly.ticketing_app.repository.ProjectRepository;
 import com.xrm.tickly.ticketing_app.repository.UserRepository;
+import com.xrm.tickly.ticketing_app.service.ProjectService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
