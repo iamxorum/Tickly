@@ -1,6 +1,6 @@
 -- Step 1: Create the schema
-CREATE SCHEMA IF NOT EXISTS ticketing_system;
-SET search_path TO ticketing_system;
+CREATE SCHEMA IF NOT EXISTS tickly_schema;
+SET search_path TO tickly_schema;
 
 -- Step 2: Create tables
 
