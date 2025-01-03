@@ -35,7 +35,6 @@ public class TicketDTO {
 
     private LocalDateTime startDate;
 
-    @NotNull(message = "Assignee ID is required")
     private Long assigneeId;
 
     @NotNull(message = "Reporter ID is required")

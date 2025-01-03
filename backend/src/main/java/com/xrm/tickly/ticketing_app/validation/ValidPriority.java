@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = PriorityValidator.class)
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPriority {
-    String message() default "Invalid priority level";
+    String message() default "Invalid priority value";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

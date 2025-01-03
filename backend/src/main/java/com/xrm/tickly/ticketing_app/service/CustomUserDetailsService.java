@@ -1,4 +1,4 @@
-package com.xrm.tickly.ticketing_app.security;
+package com.xrm.tickly.ticketing_app.service;
 
 import com.xrm.tickly.ticketing_app.model.User;
 import com.xrm.tickly.ticketing_app.repository.UserRepository;

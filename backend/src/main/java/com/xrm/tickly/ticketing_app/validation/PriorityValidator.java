@@ -4,17 +4,19 @@ import com.xrm.tickly.ticketing_app.enums.TicketPriority;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PriorityValidator implements ConstraintValidator<ValidPriority, String> {
+public class PriorityValidator implements ConstraintValidator<ValidPriority, TicketPriority> {
+    
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null) {
+    public void initialize(ValidPriority constraintAnnotation) {
+    }
+
+    @Override
+    public boolean isValid(TicketPriority priority, ConstraintValidatorContext context) {
+        if (priority == null) {
             return false;
         }
-        try {
-            TicketPriority.valueOf(value.toUpperCase());
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        
+        // Add any additional validation logic if needed
+        return true;
     }
 }
