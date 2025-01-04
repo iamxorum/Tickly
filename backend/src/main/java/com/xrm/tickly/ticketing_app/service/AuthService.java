@@ -27,7 +27,7 @@ public class AuthService {
             new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
 
-        // Get the user from repository instead of casting
+         
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         
@@ -53,7 +53,7 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(UserRole.USER);  // Explicitly set the default role
+        user.setRole(UserRole.USER);   
 
         User savedUser = userRepository.save(user);
         String token = jwtTokenUtil.generateToken(savedUser);

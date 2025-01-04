@@ -13,10 +13,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Table(name = "users")
 @Data
+@ToString(exclude = {"projects", "assignedTickets", "reportedTickets", "comments"})
+@EqualsAndHashCode(exclude = {"projects", "assignedTickets", "reportedTickets", "comments"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +40,13 @@ public class User implements UserDetails {
     private String email;
 
     @NotBlank(message = "Password is required")
-    @StrongPassword // Custom validation for password strength
+    @StrongPassword  
     private String password;
 
     @NotNull(message = "Role is required")
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(255) default 'USER'")
-    private UserRole role = UserRole.USER; // Set default role
+    private UserRole role = UserRole.USER;  
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -51,7 +55,7 @@ public class User implements UserDetails {
     private LocalDateTime updatedAt;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive = true;  // Default to true for new users
+    private boolean isActive = true;   
 
     @Column(name = "failed_login_attempts")
     private Integer failedLoginAttempts = 0;
@@ -110,7 +114,7 @@ public class User implements UserDetails {
         return isActive;
     }
 
-    // Helper method to check if user is admin
+     
     public boolean isAdmin() {
         return UserRole.ADMIN.equals(this.role);
     }

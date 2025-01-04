@@ -24,33 +24,27 @@ public class ValidationService {
         Map<String, String> errors = new HashMap<>();
 
         return CompletableFuture.supplyAsync(() -> {
-            // Required fields validation
             if (ticket.getTitle() == null || ticket.getTitle().trim().isEmpty()) {
                 errors.put("title", "Title is required");
             }
 
-            // Status validation
             if (!isValidStatus(ticket.getStatus())) {
                 errors.put("status", "Invalid status");
             }
 
-            // Priority validation
             if (!isValidPriority(ticket.getPriority())) {
                 errors.put("priority", "Invalid priority level");
             }
 
-            // Date validation
             if (ticket.getDueDate() != null && ticket.getStartDate() != null 
                 && ticket.getDueDate().isBefore(ticket.getStartDate())) {
                 errors.put("dueDate", "Due date must be after start date");
             }
 
-            // Assignee validation
             if (ticket.getAssigneeId() != null && !userRepository.existsById(ticket.getAssigneeId())) {
                 errors.put("assigneeId", "Invalid assignee");
             }
 
-            // Reporter validation
             if (ticket.getReporterId() != null && !userRepository.existsById(ticket.getReporterId())) {
                 errors.put("reporterId", "Invalid reporter");
             }
@@ -66,23 +60,19 @@ public class ValidationService {
         Map<String, String> errors = new HashMap<>();
 
         return CompletableFuture.supplyAsync(() -> {
-            // Name validation
             if (project.getName() == null || project.getName().trim().isEmpty()) {
                 errors.put("name", "Project name is required");
             } else if (projectRepository.existsByName(project.getName())) {
                 errors.put("name", "Project name already exists");
             }
 
-            // Status validation
             if (project.getStatus() == null) {
                 errors.put("status", "Project status is required");
             }
 
-            // Members validation
             if (project.getMemberIds() == null || project.getMemberIds().isEmpty()) {
                 errors.put("members", "Project must have at least one member");
             } else {
-                // Validate all member IDs exist
                 for (Long memberId : project.getMemberIds()) {
                     if (!userRepository.existsById(memberId)) {
                         errors.put("members", "Invalid member ID: " + memberId);
@@ -91,7 +81,6 @@ public class ValidationService {
                 }
             }
 
-            // Date validation
             if (project.getEndDate() != null && project.getStartDate() != null 
                 && project.getEndDate().isBefore(project.getStartDate())) {
                 errors.put("endDate", "End date must be after start date");
@@ -108,17 +97,14 @@ public class ValidationService {
         Map<String, String> errors = new HashMap<>();
 
         return CompletableFuture.supplyAsync(() -> {
-            // Username validation
             if (userRepository.existsByUsername(request.getUsername())) {
                 errors.put("username", "Username already exists");
             }
 
-            // Email validation
             if (userRepository.existsByEmail(request.getEmail())) {
                 errors.put("email", "Email already exists");
             }
 
-            // Password strength validation
             if (!isPasswordStrong(request.getPassword())) {
                 errors.put("password", "Password does not meet strength requirements");
             }
@@ -134,17 +120,14 @@ public class ValidationService {
         Map<String, String> errors = new HashMap<>();
 
         return CompletableFuture.supplyAsync(() -> {
-            // Username validation
             if (userRepository.existsByUsername(request.getUsername())) {
                 errors.put("username", "Username already exists");
             }
 
-            // Email validation
             if (userRepository.existsByEmail(request.getEmail())) {
                 errors.put("email", "Email already exists");
             }
 
-            // Password strength validation
             if (!isPasswordStrong(request.getPassword())) {
                 errors.put("password", "Password does not meet strength requirements");
             }
@@ -160,12 +143,10 @@ public class ValidationService {
         Map<String, String> errors = new HashMap<>();
 
         return CompletableFuture.supplyAsync(() -> {
-            // Content validation
             if (comment.getContent() == null || comment.getContent().trim().isEmpty()) {
                 errors.put("content", "Comment content is required");
             }
 
-            // Ticket validation
             if (comment.getTicketId() != null && !ticketRepository.existsById(comment.getTicketId())) {
                 errors.put("ticketId", "Invalid ticket ID");
             }
@@ -222,9 +203,9 @@ public class ValidationService {
     private boolean isPasswordStrong(String password) {
         if (password == null) return false;
         return password.length() >= 8 &&
-               password.matches(".*[A-Z].*") &&  // at least one uppercase
-               password.matches(".*[a-z].*") &&  // at least one lowercase
-               password.matches(".*\\d.*") &&    // at least one digit
-               password.matches(".*[!@#$%^&*()\\-_=+{};:,<.>].*"); // at least one special char
+               password.matches(".*[A-Z].*") &&  
+               password.matches(".*[a-z].*") &&  
+               password.matches(".*\\d.*") &&   
+               password.matches(".*[!@#$%^&*()\\-_=+{};:,<.>].*"); 
     }
 }

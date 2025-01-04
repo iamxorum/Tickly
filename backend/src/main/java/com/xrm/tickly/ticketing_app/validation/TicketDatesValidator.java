@@ -9,7 +9,7 @@ public class TicketDatesValidator implements ConstraintValidator<ValidTicketDate
     @Override
     public boolean isValid(TicketDTO ticket, ConstraintValidatorContext context) {
         if (ticket.getStartDate() == null || ticket.getDueDate() == null) {
-            return true; // Let @NotNull handle null validation
+            return true;  
         }
         return ticket.getDueDate().isAfter(ticket.getStartDate());
     }

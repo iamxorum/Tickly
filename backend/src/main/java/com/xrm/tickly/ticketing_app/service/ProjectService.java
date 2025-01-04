@@ -9,9 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.xrm.tickly.ticketing_app.model.User;
+import com.xrm.tickly.ticketing_app.dto.UserDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +49,14 @@ public class ProjectService {
         project.setDescription(projectDTO.getDescription());
         project.setStatus(projectDTO.getStatus());
         
+        if (projectDTO.getMemberIds() != null && !projectDTO.getMemberIds().isEmpty()) {
+            Set<User> members = projectDTO.getMemberIds().stream()
+                .map(memberId -> userRepository.findById(memberId)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + memberId)))
+                .collect(Collectors.toSet());
+            project.setMembers(members);
+        }
+        
         return convertToDTO(projectRepository.save(project));
     }
 
@@ -70,6 +80,15 @@ public class ProjectService {
         return convertToDTO(projectRepository.save(project));
     }
 
+    public List<UserDTO> getProjectMembers(Long projectId) {
+        Project project = projectRepository.findById(projectId)
+            .orElseThrow(() -> new ResourceNotFoundException("Project not found with id: " + projectId));
+        
+        return project.getMembers().stream()
+            .map(this::convertUserToDTO)
+            .collect(Collectors.toList());
+    }
+
     private ProjectDTO convertToDTO(Project project) {
         ProjectDTO dto = new ProjectDTO();
         dto.setId(project.getId());
@@ -78,6 +97,9 @@ public class ProjectService {
         dto.setStatus(project.getStatus());
         dto.setCreatedAt(project.getCreatedAt());
         dto.setUpdatedAt(project.getUpdatedAt());
+        dto.setMemberIds(project.getMembers().stream()
+            .map(User::getId)
+            .collect(Collectors.toSet()));
         return dto;
     }
 
@@ -87,5 +109,14 @@ public class ProjectService {
         project.setDescription(dto.getDescription());
         project.setStatus(dto.getStatus());
         return project;
+    }
+
+    private UserDTO convertUserToDTO(User user) {
+        return UserDTO.builder()
+            .id(user.getId())
+            .username(user.getUsername())
+            .email(user.getEmail())
+            .role(user.getRole())
+            .build();
     }
 }

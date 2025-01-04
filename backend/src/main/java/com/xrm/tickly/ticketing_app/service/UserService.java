@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xrm.tickly.ticketing_app.enums.UserRole;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public UserDTO updateUserRole(Long id, UserRole role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
+        user.setRole(role);
+        userRepository.save(user);
+        return mapToDTO(user);
+    }
+
     private UserDTO convertToDTO(User user) {
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
@@ -71,5 +80,14 @@ public class UserService {
         user.setEmail(dto.getEmail());
         user.setRole(dto.getRole());
         return user;
+    }
+
+    private UserDTO mapToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setRole(user.getRole());
+        return userDTO;
     }
 }

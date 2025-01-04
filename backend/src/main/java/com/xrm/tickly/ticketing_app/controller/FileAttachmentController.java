@@ -37,21 +37,15 @@ public class FileAttachmentController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "201",
-            description = "File uploaded successfully",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = FileAttachmentDTO.class)
-            )
+            description = "File uploaded successfully"
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Invalid input or file type",
-            content = @Content
+            description = "Invalid input or file type"
         ),
         @ApiResponse(
             responseCode = "404",
-            description = "Ticket or user not found",
-            content = @Content
+            description = "Ticket or user not found"
         )
     })
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -62,7 +56,8 @@ public class FileAttachmentController {
                 required = true,
                 content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE,
                     schema = @Schema(type = "string", format = "binary")
-            )) 
+                )
+            ) 
             MultipartFile file,
 
             @RequestParam("ticketId")
@@ -92,15 +87,11 @@ public class FileAttachmentController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Files retrieved successfully",
-            content = @Content(mediaType = "application/json",
-                schema = @Schema(implementation = FileAttachmentDTO.class)
-            )
+            description = "Files retrieved successfully"
         ),
         @ApiResponse(
             responseCode = "404",
-            description = "Ticket not found",
-            content = @Content
+            description = "Ticket not found"
         )
     })
     @GetMapping("/ticket/{ticketId}")
@@ -122,13 +113,11 @@ public class FileAttachmentController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "204",
-            description = "File deleted successfully",
-            content = @Content
+            description = "File deleted successfully"
         ),
         @ApiResponse(
             responseCode = "404",
-            description = "File not found",
-            content = @Content
+            description = "File not found"
         )
     })
     @DeleteMapping("/{id}")

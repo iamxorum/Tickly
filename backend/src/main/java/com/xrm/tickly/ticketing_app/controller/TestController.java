@@ -1,15 +1,17 @@
 package com.xrm.tickly.ticketing_app.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@CrossOrigin(origins = "*")
+@RequestMapping("/test")
+@Tag(name = "Test", description = "APIs for testing purposes")
 public class TestController {
-    
-    @GetMapping("/test")
-    public String test() {
-        return "API is working!";
+
+    @GetMapping
+    @Operation(summary = "Test endpoint", description = "A simple test endpoint to check the API")
+    public String testEndpoint() {
+        return "Test endpoint is working!";
     }
 }

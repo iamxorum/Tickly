@@ -7,9 +7,11 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.Set;
 import com.xrm.tickly.ticketing_app.enums.ProjectStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 public class ProjectDTO {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Null(groups = ValidationGroups.Create.class)
     @NotNull(groups = ValidationGroups.Update.class)
     private Long id;

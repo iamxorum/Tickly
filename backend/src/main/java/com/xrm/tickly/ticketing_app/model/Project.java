@@ -8,9 +8,13 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import com.xrm.tickly.ticketing_app.enums.ProjectStatus;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 @Entity
 @Table(name = "projects")
 @Data
+@ToString(exclude = {"tickets", "members"})
+@EqualsAndHashCode(exclude = {"tickets", "members"})
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

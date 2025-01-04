@@ -14,7 +14,7 @@ public class AllowedEmailDomainValidator implements ConstraintValidator<AllowedE
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null || email.isEmpty()) {
-            return true; // Let @NotNull or @NotBlank handle this
+            return true;  
         }
 
         String domain = email.substring(email.indexOf("@") + 1).toLowerCase();

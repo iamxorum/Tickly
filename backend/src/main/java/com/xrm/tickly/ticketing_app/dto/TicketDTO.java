@@ -7,13 +7,13 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 import com.xrm.tickly.ticketing_app.enums.TicketStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xrm.tickly.ticketing_app.enums.TicketPriority;
 
 @Data
 @ValidTicketDates(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
 public class TicketDTO {
-    @Null(groups = ValidationGroups.Create.class)
-    @NotNull(groups = ValidationGroups.Update.class)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "Title is required")

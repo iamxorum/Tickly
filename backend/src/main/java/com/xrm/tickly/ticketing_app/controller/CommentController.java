@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import com.xrm.tickly.ticketing_app.model.User;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -36,11 +39,12 @@ public class CommentController {
         @ApiResponse(responseCode = "404", description = "Ticket not found"),
         @ApiResponse(responseCode = "403", description = "Not authorized to view comments")
     })
+
     public ResponseEntity<Page<CommentDTO>> getTicketComments(
             @Parameter(description = "ID of the ticket to get comments for") 
             @PathVariable Long ticketId,
             @Parameter(description = "Pagination parameters") 
-            Pageable pageable) {
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(commentService.getTicketComments(ticketId, pageable));
     }
 
@@ -60,7 +64,7 @@ public class CommentController {
             @PathVariable Long ticketId,
             @Parameter(description = "Comment details") 
             @Valid @RequestBody CommentDTO commentDTO) {
-        return ResponseEntity.ok(commentService.createComment(ticketId, getCurrentUserId(), commentDTO));
+        return ResponseEntity.ok(commentService.createComment(ticketId, 1L, commentDTO));
     }
 
     @PutMapping("/{commentId}")
@@ -101,11 +105,5 @@ public class CommentController {
             @PathVariable Long commentId) {
         commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build();
-    }
-
-    private Long getCurrentUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return user.getId();
     }
 }

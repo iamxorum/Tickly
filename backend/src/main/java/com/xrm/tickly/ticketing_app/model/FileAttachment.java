@@ -27,7 +27,7 @@ public class FileAttachment {
     private Ticket ticket;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uploaded_by_id")  // This matches the repository method name
+    @JoinColumn(name = "uploaded_by_id")   
     private User uploadedBy;
 
     private LocalDateTime createdAt;

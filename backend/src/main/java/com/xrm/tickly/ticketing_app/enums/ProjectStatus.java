@@ -2,7 +2,7 @@ package com.xrm.tickly.ticketing_app.enums;
 
 public enum ProjectStatus {
     ACTIVE,
-    ON_HOLD,
+    INACTIVE,
     COMPLETED,
-    CANCELLED
+    ARCHIVED
 }

@@ -6,7 +6,7 @@ import jakarta.validation.ConstraintValidatorContext;
 public class StrongPasswordValidator implements ConstraintValidator<StrongPassword, String> {
     @Override
     public void initialize(StrongPassword constraintAnnotation) {
-        // No initialization needed
+         
     }
 
     @Override
@@ -15,10 +15,10 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
             return false;
         }
         
-        return password.length() >= 8 && // at least 8 chars
-               password.matches(".*[A-Z].*") && // at least one uppercase
-               password.matches(".*[a-z].*") && // at least one lowercase
-               password.matches(".*\\d.*") && // at least one digit
-               password.matches(".*[!@#$%^&*()\\-_=+{};:,<.>].*"); // at least one special char
+        return password.length() >= 8 &&  
+               password.matches(".*[A-Z].*") &&  
+               password.matches(".*[a-z].*") &&  
+               password.matches(".*\\d.*") &&  
+               password.matches(".*[!@#$%^&*()\\-_=+{};:,<.>].*");  
     }
 } 

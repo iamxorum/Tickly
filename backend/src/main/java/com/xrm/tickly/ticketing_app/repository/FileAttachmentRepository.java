@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FileAttachmentRepository extends JpaRepository<FileAttachment, Long> {
     List<FileAttachment> findByTicketId(Long ticketId);
-    List<FileAttachment> findByUploadedBy_Id(Long userId);  // Use this format for nested properties
+    List<FileAttachment> findByUploadedBy_Id(Long userId);   
 }
