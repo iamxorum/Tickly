@@ -30,20 +30,22 @@ public class FileStorageService {
 
     public String storeFile(MultipartFile file) {
         String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
-        String fileExtension = getFileExtension(originalFileName);
-        String fileName = UUID.randomUUID().toString() + fileExtension;
-
+        
+        if (originalFileName.contains("..")) {
+            throw new RuntimeException("Invalid file path sequence " + originalFileName);
+        }
+    
+        String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
+    
+        System.out.println("Storing file: " + uniqueFileName);
+    
         try {
-            if (fileName.contains("..")) {
-                throw new RuntimeException("Invalid file path sequence " + fileName);
-            }
-
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Path targetLocation = this.fileStorageLocation.resolve(uniqueFileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-
-            return fileName;
+    
+            return uniqueFileName; 
         } catch (IOException ex) {
-            throw new RuntimeException("Could not store file " + fileName, ex);
+            throw new RuntimeException("Could not store file " + uniqueFileName, ex);
         }
     }
 
