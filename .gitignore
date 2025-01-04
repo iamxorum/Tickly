@@ -34,7 +34,7 @@ coverage/
 /.gradle/
 build/
 out/
-target/
+backend/target
 .idea/
 *.class
 *.jar
