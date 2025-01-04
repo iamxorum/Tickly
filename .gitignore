@@ -1,12 +1,108 @@
-# Package Files #
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+out/
+coverage/
+*.tgz
+
+# React
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+/public/static/
+*.log
+
+# Java
+*.class
 *.jar
 *.war
-*.nar
 *.ear
+*.db
+*.log
+*.hprof
+*.iml
+*.gradle
+/.gradle/
+build/
+out/
+target/
+.idea/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.log
+*.hprof
+*.db
+*.DS_Store
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+*.class
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+target/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Other
+*.swp
+*.swo
+*.swn
+*.tmp
+*.temp
+*.bak
+*.orig
+*.old
+*.log
+*.pid
+*.seed
+*.tgz
 *.zip
 *.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+*.7z
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+*.lib
+*.o
+*.obj
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.hprof
+*.db
+*.DS_Store
