@@ -63,6 +63,21 @@ public class User implements UserDetails {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
+    @NotBlank(message = "First name is required")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Pattern(regexp = "^\\+?[0-9. ()-]{7,}$", message = "Invalid phone number format")
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "address")
+    private String address;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -114,7 +129,6 @@ public class User implements UserDetails {
         return isActive;
     }
 
-     
     public boolean isAdmin() {
         return UserRole.ADMIN.equals(this.role);
     }

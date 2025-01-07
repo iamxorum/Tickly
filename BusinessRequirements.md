@@ -50,8 +50,8 @@ Based on the business requirements, here are five main features that the project
    - Enable users to add comments to tickets. 💬
    - Display comments in the ticket details view. 🗨️
 
-4. **User Role Management**:
-   - Implement role-based access control to restrict certain actions based on user roles (e.g., only admins can delete tickets). ⚖️
+4. **Project Management**:
+   - Create Projects and assign users to them. 📂
 
 5. **File Attachment Support**:
    - Allow users to upload and attach files to tickets. 📂

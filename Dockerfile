@@ -5,10 +5,10 @@ FROM openjdk:23-jdk
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY backend/target/TickLy-0.4.0-SNAPSHOT.jar /app/TickLy-0.4.0-SNAPSHOT.jar
+COPY backend/target/TickLy-0.5.0-SNAPSHOT.jar /app/TickLy-0.5.0-SNAPSHOT.jar
 
 # Expose the port for the app (if your app uses port 8080)
 EXPOSE 8080
 
 # Command to run the application
-CMD ["java", "-jar", "/app/TickLy-0.4.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/TickLy-0.5.0-SNAPSHOT.jar"]

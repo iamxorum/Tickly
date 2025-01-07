@@ -20,4 +20,16 @@ public class RegisterRequestDTO {
     @NotBlank(message = "{validation.notblank}")
     @StrongPassword(message = "{validation.password.strength}")
     private String password;
+
+    // New fields
+    @NotBlank(message = "{firstName.required}")
+    private String firstName;
+
+    @NotBlank(message = "{lastName.required}")
+    private String lastName;
+
+    @Pattern(regexp = "^\\+?[0-9]{7,15}$", message = "{phoneNumber.invalid}")
+    private String phoneNumber;
+
+    private String address;
 }

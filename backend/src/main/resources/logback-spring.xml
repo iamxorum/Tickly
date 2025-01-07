@@ -1,0 +1,60 @@
+<configuration>
+
+    <!-- Appender for general logs -->
+    <appender name="TICKLY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/tickly.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/tickly.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender for error logs -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender for AOP logs -->
+    <appender name="AOP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/aop.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/aop.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger for application logs -->
+    <logger name="com.xrm.tickly.ticketing_app" level="DEBUG" additivity="false">
+        <appender-ref ref="TICKLY" />
+    </logger>
+
+    <!-- Logger for AOP logs -->
+    <logger name="com.xrm.tickly.ticketing_app.aspect" level="DEBUG" additivity="false">
+        <appender-ref ref="AOP" />
+    </logger>
+
+    <!-- Logger for error logs -->
+    <logger name="org.springframework.web" level="ERROR" additivity="false">
+        <appender-ref ref="ERROR" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="TICKLY" />
+    </root>
+</configuration>

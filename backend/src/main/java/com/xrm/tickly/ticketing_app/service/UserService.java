@@ -44,7 +44,11 @@ public class UserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setRole(userDTO.getRole());
-        
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setAddress(userDTO.getAddress());
+
         User updatedUser = userRepository.save(user);
         return convertToDTO(updatedUser);
     }
@@ -57,12 +61,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    @Transactional
     public UserDTO updateUserRole(Long id, UserRole role) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
         user.setRole(role);
         userRepository.save(user);
-        return mapToDTO(user);
+        return convertToDTO(user);
     }
 
     private UserDTO convertToDTO(User user) {
@@ -71,6 +76,10 @@ public class UserService {
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setRole(user.getRole());
+        dto.setFirstName(user.getFirstName());  
+        dto.setLastName(user.getLastName());    
+        dto.setPhoneNumber(user.getPhoneNumber());  
+        dto.setAddress(user.getAddress());  
         return dto;
     }
 
@@ -79,15 +88,10 @@ public class UserService {
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setRole(dto.getRole());
+        user.setFirstName(dto.getFirstName());  
+        user.setLastName(dto.getLastName());    
+        user.setPhoneNumber(dto.getPhoneNumber());  
+        user.setAddress(dto.getAddress()); 
         return user;
-    }
-
-    private UserDTO mapToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setUsername(user.getUsername());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setRole(user.getRole());
-        return userDTO;
     }
 }
