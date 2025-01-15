@@ -1,0 +1,40 @@
+name: Deploy to XRM-SRV02
+
+on:
+  push:
+    branches: [ main ]  # adjust if your main branch has a different name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '23'
+          distribution: 'temurin'
+          
+      - name: Build with Maven
+        run: mvn -B package --file backend/pom.xml
+        
+      - name: Copy files to homelab
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOMELAB_HOST }}
+          username: ${{ secrets.HOMELAB_USERNAME }}
+          key: ${{ secrets.HOMELAB_SSH_KEY }}
+          source: "docker-compose.yml,Dockerfile,backend/target/TickLy-0.5.0-SNAPSHOT.jar"
+          target: "/opt/tickly"
+          
+      - name: Deploy to homelab
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOMELAB_HOST }}
+          username: ${{ secrets.HOMELAB_USERNAME }}
+          key: ${{ secrets.HOMELAB_SSH_KEY }}
+          script: |
+            cd /opt/tickly
+            docker-compose down
+            docker-compose up -d --build
