@@ -10,7 +10,6 @@ class UserTest {
     void testUser() {
         User user = new User();
         
-         
         user.setId(1L);
         user.setUsername("testuser");
         user.setEmail("testuser@example.com");
